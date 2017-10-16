@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>res/8.png</file>
+        <file>res/9.png</file>
+        <file>res/10.png</file>
+        <file>res/11.png</file>
+        <file>res/12.png</file>
+        <file>res/13.png</file>
+        <file>res/14.png</file>
+        <file>res/16.png</file>
+        <file>res/17.png</file>
+        <file>res/18.png</file>
+        <file>res/19.png</file>
+        <file>res/20.png</file>
+        <file>res/21.png</file>
+        <file>res/22.png</file>
+        <file>res/begining.png</file>
+        <file>res/chessboard.png</file>
+        <file>res/editor.png</file>
+        <file>res/exit.png</file>
+        <file>res/hint.png</file>
+        <file>res/localpvp.png</file>
+        <file>res/pve.png</file>
+        <file>res/readmanual.png</file>
+        <file>res/returnbegining.png</file>
+        <file>res/savemanual.png</file>
+        <file>res/selected.png</file>
+    </qresource>
+</RCC>
