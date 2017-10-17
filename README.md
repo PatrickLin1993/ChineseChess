@@ -2,7 +2,7 @@
 
 Qt 5.8 + MSVC 2013
 
-[Release]()
+[Release](https://github.com/PatrickLin1993/ChineseChess/releases)
 
 
 
