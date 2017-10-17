@@ -81,32 +81,36 @@ void MainDialog::update_etime()
 
 void MainDialog::mousePressEvent(QMouseEvent *e)
 {
-	if (mode != EDITOR){
-		auto res = Chessboard::GetInstance()->Go(e->x(), e->y());
-		hint_mv = 0;
-		repaint();
-		PlaySounds(res, true);
+    if(mode == LOCALPVP){
+        auto res = Chessboard::GetInstance()->Go(e->x(), e->y());
+        PlaySounds(res, true);
+        hint_mv = 0;
+        repaint();
 
-		if (res == NEXT){
-			sideGo = (sideGo == PLAYER_HOST ? PLAYER_OTHER : PLAYER_HOST);
-			
-			if (mode == PVP){
-				return;
-			}
-			if (mode == PVE){
-				QTime etime;
-				etime.restart();
-				this->setCursor(Qt::CursorShape::WaitCursor);
-				res = ComputerPlayer::GetInstance()->Go();
-				this->setCursor(Qt::CursorShape::ArrowCursor);
-				*etimeOther = etimeOther->addMSecs(etime.elapsed());
-				sideGo = PLAYER_HOST;
-			}
-			PlaySounds(res, false);
-			repaint();
-		}
+        if (res == NEXT || res == CHECKED){
+            sideGo = (sideGo == PLAYER_HOST ? PLAYER_OTHER : PLAYER_HOST);
+        }
+    }
+    else if (mode == PVE){
+        auto res = Chessboard::GetInstance()->Go(e->x(), e->y());
+        PlaySounds(res, true);
+        hint_mv = 0;
+        repaint();
+        sideGo = PLAYER_OTHER;
+
+        if (res == NEXT || res == CHECKED){
+            QTime etime;
+            etime.restart();
+            this->setCursor(Qt::CursorShape::WaitCursor);
+            res = ComputerPlayer::GetInstance()->Go();
+            this->setCursor(Qt::CursorShape::ArrowCursor);
+            *etimeOther = etimeOther->addMSecs(etime.elapsed());
+            sideGo = PLAYER_HOST;
+            PlaySounds(res, false);
+            repaint();
+        }
 	}
-	else {
+    else if (mode == EDITOR) {
 		int idx;
 		if (editor_idSelected != 0 && Chessboard::GetInstance()->GetIndex(e->x(), e->y(), &idx)){
 			Chessboard::GetInstance()->GetBoardData()[idx] = editor_idSelected;
